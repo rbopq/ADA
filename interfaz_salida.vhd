@@ -30,30 +30,29 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity interfaz_salida is
-    Port ( Reset : in  STD_LOGIC;
-           Clk : in  STD_LOGIC;
-           Fin : in  STD_LOGIC;
-           Salidas : in  STD_LOGIC_VECTOR (31 downto 0);
-           Data_out : out  STD_LOGIC_VECTOR (31 downto 0);
-           Valid_out : out  STD_LOGIC);
+	Port(Reset     : in  STD_LOGIC;
+		 Clk       : in  STD_LOGIC;
+		 Fin       : in  STD_LOGIC;
+		 Salidas   : in  STD_LOGIC_VECTOR(31 downto 0);
+		 Data_out  : out STD_LOGIC_VECTOR(31 downto 0);
+		 Valid_out : out STD_LOGIC);
 end interfaz_salida;
 
 architecture Behavioral of interfaz_salida is
 begin
-
-proc_salida: process(reset, clk)
-begin 
-	if reset='0' then 
-		Data_out<= (others => '0');
-		Valid_out<= '0';
-	elsif (clk'event and clk='1') then
-		Valid_out<='0';
-		if Fin = '1' then
-			Data_out<= Salidas;
-			Valid_out<='1';		
+	proc_salida : process(reset, clk)
+	begin
+		if reset = '0' then
+			Data_out  <= (others => '0');
+			Valid_out <= '0';
+		elsif (clk'event and clk = '1') then
+			Valid_out <= '0';
+			if Fin = '1' then
+				Data_out  <= Salidas;
+				Valid_out <= '1';
+			end if;
 		end if;
-	end if;
-end process;
+	end process;
 
 end Behavioral;
 

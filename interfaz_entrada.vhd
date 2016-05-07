@@ -30,27 +30,25 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity interfaz_entrada is
-    Port ( Reset : in  STD_LOGIC;
-           Clk : in  STD_LOGIC;
-           Validacion : in  STD_LOGIC;
-           Data_in : in  STD_LOGIC_VECTOR (31 downto 0);
-           Entradas : out  STD_LOGIC_VECTOR (31 downto 0));
+	Port(Reset      : in  STD_LOGIC;
+		 Clk        : in  STD_LOGIC;
+		 Validacion : in  STD_LOGIC;
+		 Data_in    : in  STD_LOGIC_VECTOR(31 downto 0);
+		 Entradas   : out STD_LOGIC_VECTOR(31 downto 0));
 end interfaz_entrada;
 
 architecture Behavioral of interfaz_entrada is
-
 begin
-
-proc_captura: process(reset, clk)
-begin 
-	if reset='0' then 
-		Entradas<= (others => '0');
-	elsif (clk'event and clk='1') then
-		if Validacion = '1' then
-			Entradas <= Data_in;
+	proc_captura : process(reset, clk)
+	begin
+		if reset = '0' then
+			Entradas <= (others => '0');
+		elsif (clk'event and clk = '1') then
+			if Validacion = '1' then
+				Entradas <= Data_in;
+			end if;
 		end if;
-	end if;
-end process;
+	end process;
 
 end Behavioral;
 
